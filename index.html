@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ethan Do | Tech Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0b122b;
+      --panel: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.14);
+      --glow: #00c2ff;
+      --accent: #6f7cff;
+      --accent-2: #1fe4ff;
+      --text: #e6edff;
+      --muted: #b7c2d9;
+      --card-radius: 22px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --tag-bg: rgba(255, 255, 255, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Manrope', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(40, 90, 200, 0.25), transparent 22%),
+                  radial-gradient(circle at 80% 0%, rgba(140, 70, 255, 0.3), transparent 22%),
+                  radial-gradient(circle at 50% 85%, rgba(0, 200, 255, 0.22), transparent 25%),
+                  #050a1a;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      position: relative;
+      padding: 0 18px 90px;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(7, 12, 30, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 8px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(140deg, #0df, #7a5bff);
+      display: grid;
+      place-items: center;
+      color: #021024;
+      font-weight: 800;
+      box-shadow: 0 0 18px rgba(0, 220, 255, 0.65);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-weight: 500;
+    }
+
+    .nav-link {
+      padding: 10px 14px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      color: var(--muted);
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      box-shadow: 0 6px 20px rgba(0, 194, 255, 0.18);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 80px 0 40px;
+      position: relative;
+    }
+
+    .section h2 {
+      text-align: center;
+      font-size: clamp(28px, 4vw, 38px);
+      margin: 0 0 12px;
+      letter-spacing: 0.4px;
+    }
+
+    .section .subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 32px;
+      font-size: 15px;
+    }
+
+    .underline {
+      display: inline-block;
+      position: relative;
+    }
+    .underline::after {
+      content: "";
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      bottom: -6px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      border-radius: 999px;
+      box-shadow: 0 0 15px rgba(0, 194, 255, 0.8);
+    }
+
+    .glass {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      box-shadow: var(--shadow), 0 0 20px rgba(0, 194, 255, 0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .about-card {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 32px;
+      padding: 32px;
+      align-items: center;
+      border: 1px solid rgba(95, 146, 255, 0.35);
+      box-shadow: var(--shadow), 0 0 35px rgba(106, 130, 255, 0.35);
+    }
+
+    .avatar {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 18px;
+      background: radial-gradient(circle at 30% 30%, #0ff, #0a1f3d 55%);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 22px rgba(0, 194, 255, 0.6);
+      border: 2px solid rgba(0, 194, 255, 0.6);
+      display: grid;
+      place-items: center;
+      color: #031024;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .avatar::after {
+      content: "Ethan";
+      color: rgba(4, 10, 30, 0.8);
+      font-size: 26px;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.4);
+    }
+
+    .about-text h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+      color: #ddecff;
+    }
+    .about-text p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .resume-hint {
+      margin-top: 10px;
+      color: rgba(173, 197, 255, 0.7);
+      font-size: 12px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+      justify-content: center;
+    }
+
+    .badge {
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0, 200, 255, 0.14), rgba(140, 90, 255, 0.14));
+      border: 1px solid rgba(0, 200, 255, 0.35);
+      color: #dff3ff;
+      box-shadow: 0 10px 26px rgba(0, 194, 255, 0.22);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge small {
+      display: block;
+      color: #bcd4ff;
+      font-weight: 500;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 34px 22px 28px;
+      overflow: hidden;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      bottom: 18px;
+      width: 4px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(0, 194, 255, 0.8), rgba(111, 124, 255, 0.8));
+      box-shadow: 0 0 16px rgba(0, 194, 255, 0.6);
+      border-radius: 6px;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 20px 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 20px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    .timeline-item .dot {
+      position: absolute;
+      top: 24px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      border: 4px solid #0cf;
+      box-shadow: 0 0 0 6px rgba(0, 194, 255, 0.25);
+    }
+
+    .timeline-item.left { margin-right: 22px; }
+    .timeline-item.right { margin-left: 22px; }
+    .timeline-item.left .dot { right: -36px; }
+    .timeline-item.right .dot { left: -36px; }
+
+    .timeline-item h4 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .timeline-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(0, 194, 255, 0.14);
+      border: 1px solid rgba(0, 194, 255, 0.4);
+      margin-right: 10px;
+      box-shadow: 0 0 12px rgba(0, 194, 255, 0.2);
+    }
+
+    .timeline-item .role {
+      color: #8ed4ff;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-item .date {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .timeline-item ul {
+      padding-left: 18px;
+      margin: 0;
+      color: #cfd9f7;
+      font-size: 14px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .skill-card {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .skill-card h4 {
+      margin: 0 0 14px;
+      color: #9ad5ff;
+      letter-spacing: 0.3px;
+    }
+
+    .skill-tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .skill-tile {
+      padding: 12px 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #dbe9ff;
+      text-align: center;
+      font-weight: 600;
+      box-shadow: inset 0 0 0 1px rgba(0, 194, 255, 0.08);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .project-card {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(0, 220, 255, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow), 0 0 30px rgba(0, 220, 255, 0.16);
+      display: grid;
+      gap: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 255, 204, 0.65);
+      box-shadow: 0 20px 46px rgba(0, 0, 0, 0.35), 0 0 40px rgba(0, 255, 204, 0.26);
+    }
+
+    .project-thumb {
+      width: 100%;
+      height: 160px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0, 200, 255, 0.35), rgba(111, 124, 255, 0.4));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 0 20px rgba(0, 200, 255, 0.18);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      padding: 6px 10px;
+      background: rgba(0, 200, 255, 0.14);
+      color: #d7f6ff;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 200, 255, 0.3);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .project-card h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .project-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .project-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #dce8ff;
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+    }
+    .project-btn {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 194, 255, 0.5);
+      background: linear-gradient(90deg, rgba(0, 194, 255, 0.18), rgba(0, 255, 204, 0.22));
+      color: #e9f8ff;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .project-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(0, 170, 255, 0.5), rgba(13, 203, 255, 0.25), rgba(0, 80, 220, 0.45));
+      opacity: 0.8;
+      filter: blur(60px);
+      z-index: 0;
+    }
+    .contact-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(120deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(60deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.35;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .contact-panel {
+      position: relative;
+      z-index: 1;
+      padding: 28px;
+      border-radius: var(--card-radius);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(5, 12, 30, 0.55);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel h3 {
+      margin: 0 0 10px;
+      font-size: 26px;
+    }
+    .contact-panel .info {
+      color: #e6f3ff;
+      display: grid;
+      gap: 10px;
+      margin: 12px 0 20px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cta-btn {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e9f6ff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 194, 255, 0.24); }
+
+    .contact-form {
+      position: relative;
+      z-index: 1;
+      padding: 26px;
+      border-radius: var(--card-radius);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(0, 194, 255, 0.12);
+      backdrop-filter: blur(12px);
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 194, 255, 0.28);
+      background: rgba(4, 12, 28, 0.5);
+      color: #e6f3ff;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: rgba(0, 255, 204, 0.7);
+      box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.16);
+    }
+    .contact-form button {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(90deg, #0bd7ff, #0cf0d0);
+      color: #041021;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0, 255, 204, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .contact-form button:hover { transform: translateY(-2px); }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .about-card { grid-template-columns: 1fr; }
+      .timeline::before { display: none; }
+      .timeline-item { margin: 0 !important; }
+      .timeline-item .dot { display: none; }
+      .timeline-grid { grid-template-columns: 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-links.open { display: grid; grid-template-columns: 1fr; position: absolute; top: 62px; right: 12px; background: rgba(6, 12, 30, 0.95); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
+      .menu-toggle { display: inline-flex; }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 0 12px 70px; }
+      .section { padding: 60px 0 34px; }
+      .badge { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    const navItems = [
+      { label: "About", href: "#about" },
+      { label: "Experience", href: "#experience" },
+      { label: "Skills", href: "#skills" },
+      { label: "Projects", href: "#projects" },
+      { label: "Contact", href: "#contact" },
+    ];
+
+    const timelineItems = [
+      {
+        side: "left",
+        company: "The Research Foundation for SUNY – Software Engineer",
+        date: "Apr 2025 – Present",
+        icon: "🛰️",
+        bullets: [
+          "Built FastAPI + SQL backend for semantic search over 9/11 interview videos.",
+          "Designed NLP + ETL pipeline for 20k+ transcripts.",
+          "Automated video migration from Dropbox to AWS (EC2 → S3) reducing manual work by 90%.",
+        ],
+      },
+      {
+        side: "right",
+        company: "LCW – Springer Capital – Software Engineer Intern",
+        date: "Jun 2025 – Aug 2025",
+        icon: "🌐",
+        bullets: [
+          "Engineered Python/Django API testing workflows (coverage from 70% → 95%).",
+          "Integrated Airbyte + Jira for error log sync, cutting issue resolution time by 25%.",
+          "Built monitoring scripts and dashboards for 450+ daily API requests (99.9% uptime).",
+        ],
+      },
+      {
+        side: "left",
+        company: "ITC Group – Software Engineer Intern",
+        date: "Jun 2024 – Jan 2025",
+        icon: "🏢",
+        bullets: [
+          "Implemented Angular Material UI/UX features, reducing manual data entry by 40%.",
+          "Optimized Spring Boot APIs (Swagger + PostgreSQL), decreasing downtime by 30%.",
+          "Enhanced .NET backend with better validation and CI/CD automation.",
+        ],
+      },
+    ];
+
+    const skills = [
+      { title: "Languages", items: ["Java", "C++", "C#", "JavaScript", "TypeScript", "SQL", "PHP", "Python"] },
+      { title: "Frameworks", items: ["React", "Angular", "Node.js", "Spring Boot", "Django", ".NET"] },
+      { title: "Cloud", items: ["AWS (EC2, S3)", "Azure", "GCP", "Docker", "Kubernetes"] },
+      { title: "Databases", items: ["PostgreSQL", "MySQL", "MongoDB"] },
+      { title: "Systems", items: ["Linux", "Bash", "Networking (TCP/IP, DNS)", "REST APIs"] },
+      { title: "Tools", items: ["Git", "CI/CD"] },
+    ];
+
+    const projects = [
+      {
+        title: "SkinGuard – HackNYU’25 Winning Project",
+        tags: ["MERN stack", "Flask", "OpenAI API"],
+        bullets: [
+          "AI chatbot for skin diagnostics.",
+          "Integrated OpenAI, JWT auth, and user DB.",
+          "Tested across 120+ diagnostic queries with ~85% consistency.",
+          "Reduced response latency by 20%.",
+        ],
+      },
+      {
+        title: "World Happiness Data Analysis",
+        tags: ["Python", "Pandas", "scikit-learn", "Matplotlib"],
+        bullets: [
+          "Data analysis for 150+ countries.",
+          "Built regression models to quantify feature importance.",
+          "Created charts and a prototype React dashboard for visualization.",
+        ],
+      },
+      {
+        title: "9/11 Oral History Semantic Search System",
+        tags: ["FastAPI", "SQL", "Docker", "NLP", "DLATK", "AWS"],
+        bullets: [
+          "Semantic search for 500+ interview videos.",
+          "ETL pipeline for 20,000+ transcripts using NLP and DLATK.",
+          "Sub-second query latency and scalable AWS-based video pipeline.",
+        ],
+      },
+    ];
+
+    function Navbar() {
+      const [open, setOpen] = React.useState(false);
+      return (
+        <nav className="nav">
+          <div className="nav-inner">
+            <div className="logo">
+              <div className="logo-mark">ED</div>
+              <span>Ethan Do</span>
+            </div>
+            <button className="menu-toggle" onClick={() => setOpen(!open)}>☰</button>
+            <div className={`nav-links ${open ? "open" : ""}`}>
+              {navItems.map(item => (
+                <a key={item.href} className="nav-link" href={item.href} onClick={() => setOpen(false)}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </nav>
+      );
+    }
+
+    function AboutSection() {
+      return (
+        <section className="section" id="about">
+          <h2><span className="underline">About Me</span></h2>
+          <div className="glass about-card">
+            <div className="avatar" aria-hidden="true"></div>
+            <div className="about-text">
+              <h3>Profile Summary</h3>
+              <p>
+                Computer Science student at Stony Brook University (Class of 2027), with a strong foundation in software engineering, data systems, and cloud computing. Skilled in backend, full-stack development, APIs, and ML/AI tooling, with experience across research foundations, fintech, and enterprise software teams.
+              </p>
+              <div className="resume-hint">Ethan_Do_Resume_Cisco</div>
+            </div>
+          </div>
+          <div className="badge-row">
+            <div className="badge">
+              Cloud Engineering <small>AWS, EC2, S3</small>
+            </div>
+            <div className="badge">
+              Full-Stack Development <small>React, Angular, Node, Django</small>
+            </div>
+            <div className="badge">
+              Systems &amp; Data Engineering <small>FastAPI, SQL, ETL, DLATK</small>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function ExperienceSection() {
+      return (
+        <section className="section" id="experience">
+          <h2><span className="underline">Experience Timeline</span></h2>
+          <div className="subtitle">A journey across research foundations, fintech, and enterprise engineering.</div>
+          <div className="glass timeline">
+            <div className="timeline-grid">
+              {timelineItems.map((item, idx) => (
+                <div key={idx} className={`timeline-item ${item.side}`}>
+                  <div className="dot" aria-hidden="true"></div>
+                  <h4><span className="timeline-icon">{item.icon}</span>{item.company}</h4>
+                  <div className="role">Software Engineer</div>
+                  <div className="date">{item.date}</div>
+                  <ul>
+                    {item.bullets.map((b, i) => <li key={i}>{b}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function SkillsSection() {
+      return (
+        <section className="section" id="skills">
+          <h2><span className="underline">Skills &amp; Expertise</span></h2>
+          <div className="subtitle">A showcase of technical proficiency and specialized knowledge in software engineering.</div>
+          <div className="skills-grid">
+            {skills.map((cat, idx) => (
+              <div key={idx} className="glass skill-card">
+                <h4>{cat.title}</h4>
+                <div className="skill-tiles">
+                  {cat.items.map((item, i) => (
+                    <div key={i} className="skill-tile">{item}</div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function ProjectsSection() {
+      return (
+        <section className="section" id="projects">
+          <h2><span className="underline">Projects Showcase</span></h2>
+          <div className="projects-grid">
+            {projects.map((proj, idx) => (
+              <div key={idx} className="project-card">
+                <div className="project-thumb" />
+                <div className="tags">
+                  {proj.tags.map((tag, i) => <span key={i} className="tag">{tag}</span>)}
+                </div>
+                <h4>{proj.title}</h4>
+                <ul>
+                  {proj.bullets.map((b, i) => <li key={i}>{b}</li>)}
+                </ul>
+                <div className="project-btn">View Project ↗</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function ContactSection() {
+      const onSubmit = (e) => {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        console.log("Contact message", Object.fromEntries(data.entries()));
+        alert("Message sent! (demo only)");
+        e.target.reset();
+      };
+      return (
+        <section className="section" id="contact">
+          <div className="contact-wrap glass">
+            <div className="contact-bg" aria-hidden="true"></div>
+            <div className="contact-panel">
+              <h3>Get in Touch.</h3>
+              <div className="info">
+                <div>✉️ ethan.d2402@gmail.com</div>
+                <div>📞 934-451-9545</div>
+              </div>
+              <div className="cta-buttons">
+                <a className="cta-btn" href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+                <a className="cta-btn" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+              </div>
+            </div>
+            <form className="contact-form" onSubmit={onSubmit}>
+              <input name="name" type="text" placeholder="Your Name" required />
+              <input name="email" type="email" placeholder="Your Email" required />
+              <textarea name="message" rows="4" placeholder="Your Message" required />
+              <button type="submit">Send Message</button>
+            </form>
+          </div>
+        </section>
+      );
+    }
+
+    function App() {
+      return (
+        <div className="page">
+          <Navbar />
+          <AboutSection />
+          <ExperienceSection />
+          <SkillsSection />
+          <ProjectsSection />
+          <ContactSection />
+          <div className="footer">© 2024 Ethan Do. All rights reserved.</div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
