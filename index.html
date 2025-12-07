@@ -169,7 +169,7 @@
     }
 
     .avatar {
-      width: 100%;
+      width: 80%;
       aspect-ratio: 1/1;
       border-radius: 18px;
       background: radial-gradient(circle at 30% 30%, #0ff, #0a1f3d 55%);
@@ -184,58 +184,120 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
-    .avatar::after {
-      content: "Ethan";
-      color: rgba(4, 10, 30, 0.8);
-      font-size: 26px;
-      text-shadow: 0 2px 10px rgba(255,255,255,0.4);
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .about-text h3 {
       margin: 0 0 10px;
-      font-size: 20px;
+      font-size: 40px;
       letter-spacing: 0.2px;
       color: #ddecff;
     }
     .about-text p {
       margin: 0;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 20px;
     }
 
-    .resume-hint {
-      margin-top: 10px;
-      color: rgba(173, 197, 255, 0.7);
-      font-size: 12px;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
+    .resume-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 12px 22px;
+      border-radius: 14px;
+
+      font-size: 16px;
+      font-weight: 600;
+      color: #e8f6ff;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+
+      background: rgba(0, 200, 255, 0.603);
+      border: 1.5px solid rgba(0, 200, 255, 0.35);
+      box-shadow: 0 0 15px rgba(0, 200, 255, 0.35);
+
+      transition: 0.25s ease;
+    }
+
+    .resume-badge .icon {
+      font-size: 18px;
+    }
+
+    .resume-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 22px rgba(0, 200, 255, 0.55);
+      background: rgba(0, 200, 255, 0.2);
+      border-color: rgba(0, 200, 255, 0.6);
     }
 
     .badge-row {
       display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 24px;
+      gap: 22px;
       justify-content: center;
+      margin-top: 28px;
+      flex-wrap: wrap;
     }
 
-    .badge {
-      padding: 12px 18px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(0, 200, 255, 0.14), rgba(140, 90, 255, 0.14));
-      border: 1px solid rgba(0, 200, 255, 0.35);
-      color: #dff3ff;
-      box-shadow: 0 10px 26px rgba(0, 194, 255, 0.22);
-      font-weight: 600;
-      display: inline-flex;
+    .skill-badge {
+      display: flex;
       align-items: center;
-      gap: 8px;
+      padding: 16px 26px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.6px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      transition: 0.25s ease;
+      cursor: default;
+
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
     }
 
-    .badge small {
-      display: block;
-      color: #bcd4ff;
-      font-weight: 500;
+    .skill-badge:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 22px rgba(255, 255, 255, 0.18);
+    }
+
+    /* ICONS */
+    .badge-icon {
+      width: 38px;
+      height: 38px;
+      margin-right: 16px;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
+    }
+
+    /* TEXT */
+    .badge-text h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .badge-text p {
+      margin: 2px 0 0 0;
+      font-size: 14px;
+      opacity: 0.85;
+      color: #d8eaff;
+    }
+
+    /* INDIVIDUAL COLORS */
+    .blue {
+      border-color: rgba(0, 165, 255, 0.55);
+      box-shadow: 0 0 18px rgba(0, 165, 255, 0.35);
+    }
+
+    .green {
+      border-color: rgba(0, 255, 200, 0.55);
+      box-shadow: 0 0 18px rgba(0, 255, 200, 0.35);
+    }
+
+    .purple {
+      border-color: rgba(180, 90, 255, 0.55);
+      box-shadow: 0 0 18px rgba(180, 90, 255, 0.35);
     }
 
     .timeline {
@@ -330,6 +392,29 @@
       gap: 6px;
     }
 
+    .timeline-item.placeholder {
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
+    .timeline-item.placeholder .dot {
+      display: none;
+    }
+
+    .timeline-item.right.overlap {
+      margin-top: -120px; /* adjust as needed */
+    }
+
+    .timeline-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      margin-right: 10px;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.18));
+      border-radius: 6px;
+    }
+
+
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -390,14 +475,51 @@
       box-shadow: 0 20px 46px rgba(0, 0, 0, 0.35), 0 0 40px rgba(0, 255, 204, 0.26);
     }
 
-    .project-thumb {
+    .project-thumb img {
       width: 100%;
-      height: 160px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(0, 200, 255, 0.35), rgba(111, 124, 255, 0.4));
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 0 20px rgba(0, 200, 255, 0.18);
+      height: 190px;
+      object-fit: cover;
+      border-radius: 20px;
+      opacity: 0.95;
     }
+
+    .project-buttons {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .view-btn,
+    .github-btn {
+      flex: 1;
+      text-align: center;
+      padding: 14px 0;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 17px;
+      cursor: pointer;
+      transition: 0.25s ease;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .view-btn {
+      background: linear-gradient(to right, #008cff, #00d4ff);
+      color: white;
+    }
+
+    .github-btn {
+      background: rgba(255,255,255,0.08);
+      color: #d4eaff;
+    }
+
+    .view-btn:hover {
+      opacity: 0.85;
+    }
+
+    .github-btn:hover {
+      background: rgba(255,255,255,0.18);
+    }
+
 
     .tags {
       display: flex;
@@ -597,44 +719,9 @@
       { label: "Contact", href: "#contact" },
     ];
 
-    const timelineItems = [
-      {
-        side: "left",
-        company: "The Research Foundation for SUNY – Software Engineer",
-        date: "Apr 2025 – Present",
-        icon: "🛰️",
-        bullets: [
-          "Built FastAPI + SQL backend for semantic search over 9/11 interview videos.",
-          "Designed NLP + ETL pipeline for 20k+ transcripts.",
-          "Automated video migration from Dropbox to AWS (EC2 → S3) reducing manual work by 90%.",
-        ],
-      },
-      {
-        side: "right",
-        company: "LCW – Springer Capital – Software Engineer Intern",
-        date: "Jun 2025 – Aug 2025",
-        icon: "🌐",
-        bullets: [
-          "Engineered Python/Django API testing workflows (coverage from 70% → 95%).",
-          "Integrated Airbyte + Jira for error log sync, cutting issue resolution time by 25%.",
-          "Built monitoring scripts and dashboards for 450+ daily API requests (99.9% uptime).",
-        ],
-      },
-      {
-        side: "left",
-        company: "ITC Group – Software Engineer Intern",
-        date: "Jun 2024 – Jan 2025",
-        icon: "🏢",
-        bullets: [
-          "Implemented Angular Material UI/UX features, reducing manual data entry by 40%.",
-          "Optimized Spring Boot APIs (Swagger + PostgreSQL), decreasing downtime by 30%.",
-          "Enhanced .NET backend with better validation and CI/CD automation.",
-        ],
-      },
-    ];
 
     const skills = [
-      { title: "Languages", items: ["Java", "C++", "C#", "JavaScript", "TypeScript", "SQL", "PHP", "Python"] },
+      { title: "Languages", items: ["Java", "C++", "C#", "JavaScript", "TypeScript", "SQL", "PHP", "Python", "HTML/CSS"] },
       { title: "Frameworks", items: ["React", "Angular", "Node.js", "Spring Boot", "Django", ".NET"] },
       { title: "Cloud", items: ["AWS (EC2, S3)", "Azure", "GCP", "Docker", "Kubernetes"] },
       { title: "Databases", items: ["PostgreSQL", "MySQL", "MongoDB"] },
@@ -644,34 +731,70 @@
 
     const projects = [
       {
-        title: "SkinGuard – HackNYU’25 Winning Project",
-        tags: ["MERN stack", "Flask", "OpenAI API"],
+        title: "SkinGuard – HackNYU’25 Winner",
+        image: "img/skinguard.png",
+        viewLink: "https://devpost.com/software/skinguard-ai-dermatologist",
+        githubLink: "https://github.com/Ethan-Do2005/Skinguard",
+        tags: ["Flask", "OpenAI API", "JWT", "Github", "Node.js", "Python", "Mongodb", "React"],
         bullets: [
           "AI chatbot for skin diagnostics.",
           "Integrated OpenAI, JWT auth, and user DB.",
           "Tested across 120+ diagnostic queries with ~85% consistency.",
-          "Reduced response latency by 20%.",
-        ],
+          "Reduced response latency by 20%."
+        ]
       },
+
       {
-        title: "World Happiness Data Analysis",
-        tags: ["Python", "Pandas", "scikit-learn", "Matplotlib"],
+        title: "SeeSay – HopperHacks’25 AI/ML Winner",
+        image: "img/seesay.png",
+        viewLink: "https://devpost.com/software/seesay-1r8svc",
+        githubLink: "https://github.com/Ethan-Do2005/seesay-hopperhacks-25",
+        tags: ["Web Speech API", "AI/ML", "JavaScript", "Express.js", "Node.js", "React", "HTML/CSS"],
         bullets: [
-          "Data analysis for 150+ countries.",
-          "Built regression models to quantify feature importance.",
-          "Created charts and a prototype React dashboard for visualization.",
-        ],
+          "Voice + eye-gaze interaction tool.",
+          "Built using Web Speech API and WebGazer.js.",
+          "Hands-free accessibility user experience.",
+          "Optimized real-time event processing."
+        ]
       },
+
       {
-        title: "9/11 Oral History Semantic Search System",
-        tags: ["FastAPI", "SQL", "Docker", "NLP", "DLATK", "AWS"],
+        title: "Percepta – AI Accessibility Assistant",
+        image: "img/percepta.png",
+        viewLink: "https://devpost.com/software/percepta-4jfs8b",
+        githubLink: "https://github.com/han-hangoc-le/percepta",
+        tags: ["Arkit", "RealityKit", "Yolov8", "Cerabrasapi", "Flask", "AI/ML", "Accessibility", "Gemini APIs"],
         bullets: [
-          "Semantic search for 500+ interview videos.",
-          "ETL pipeline for 20,000+ transcripts using NLP and DLATK.",
-          "Sub-second query latency and scalable AWS-based video pipeline.",
-        ],
-      },
+          "AI assistant for visually-impaired users.",
+          "ML-powered UI element detection.",
+          "React-based real-time interface.",
+          "Improves accessibility workflows."
+        ]
+      }
     ];
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+
+      emailjs
+        .sendForm(
+          "service_frltyx6",
+          "template_unohvla",
+          e.target,
+          "XOVK1l5OHpT8SwjRV"
+        )
+        .then(
+          () => {
+            alert("Message sent successfully! 🎉");
+            e.target.reset();
+          },
+          (error) => {
+            console.error("FAILED...", error);
+            alert("Oops... something went wrong.");
+          }
+        );
+    };
+
 
     function Navbar() {
       const [open, setOpen] = React.useState(false);
@@ -700,24 +823,48 @@
         <section className="section" id="about">
           <h2><span className="underline">About Me</span></h2>
           <div className="glass about-card">
-            <div className="avatar" aria-hidden="true"></div>
+            <div className="avatar" aria-hidden="true">
+              <img src="/img/avatar.png" alt="Ethan Do" className="avatar-img"/>
+            </div>
             <div className="about-text">
               <h3>Profile Summary</h3>
               <p>
-                Computer Science student at Stony Brook University (Class of 2027), with a strong foundation in software engineering, data systems, and cloud computing. Skilled in backend, full-stack development, APIs, and ML/AI tooling, with experience across research foundations, fintech, and enterprise software teams.
+                I'm an Computer Science student at Stony Brook University (Class of 2027), with a strong foundation in software engineering, data science, and cloud computing. 
               </p>
-              <div className="resume-hint">Ethan_Do_Resume_Cisco</div>
+              <p>
+                Skilled in backend, frontend, full-stack development, APIs, and ML/AI tooling, with experience across research foundations, fintech, and enterprise software teams.
+              </p>
+              <a 
+                href="https://drive.google.com/file/d/1jlxdJzm2NEhyX4g4R0xSoAq2zNQWL0bR/view?usp=sharing" 
+                target="_blank" 
+                class="resume-badge">
+                  <span class="icon">📄</span> My Resume
+              </a>
             </div>
           </div>
-          <div className="badge-row">
-            <div className="badge">
-              Cloud Engineering <small>AWS, EC2, S3</small>
+          <div class="badge-row">
+            <div class="skill-badge blue">
+              <img src="img/cloud.png" class="badge-icon" alt="Cloud"/>
+              <div class="badge-text">
+                <h4>Cloud Engineering</h4>
+                <p>AWS, EC2, S3, ...</p>
+              </div>
             </div>
-            <div className="badge">
-              Full-Stack Development <small>React, Angular, Node, Django</small>
+
+            <div class="skill-badge green">
+              <img src="img/full_stack.png" class="badge-icon" alt="Full Stack"/>
+              <div class="badge-text">
+                <h4>Full-Stack Development</h4>
+                <p>React, Angular, Node, Django, ...</p>
+              </div>
             </div>
-            <div className="badge">
-              Systems &amp; Data Engineering <small>FastAPI, SQL, ETL, DLATK</small>
+
+            <div class="skill-badge purple">
+              <img src="img/database.png" class="badge-icon" alt="Systems & Data"/>
+              <div class="badge-text">
+                <h4>Systems & Data Engineering</h4>
+                <p>FastAPI, SQL, ETL, DLATK, ...</p>
+              </div>
             </div>
           </div>
         </section>
@@ -731,18 +878,75 @@
           <div className="subtitle">A journey across research foundations, fintech, and enterprise engineering.</div>
           <div className="glass timeline">
             <div className="timeline-grid">
-              {timelineItems.map((item, idx) => (
-                <div key={idx} className={`timeline-item ${item.side}`}>
-                  <div className="dot" aria-hidden="true"></div>
-                  <h4><span className="timeline-icon">{item.icon}</span>{item.company}</h4>
-                  <div className="role">Software Engineer</div>
-                  <div className="date">{item.date}</div>
-                  <ul>
-                    {item.bullets.map((b, i) => <li key={i}>{b}</li>)}
-                  </ul>
-                </div>
-              ))}
+
+              {/* ====================== ROW 1 — SUNY (LEFT) ====================== */}
+              <div className="timeline-item left">
+                <div className="dot"></div>
+                <h4><img src="img/stonybrookmed.png" className="timeline-logo" />Stony Brook Medicine - The Research Foundation for SUNY</h4>
+                <div className="role">Software Engineer</div>
+                <div className="date">Apr 2025 - Present</div>
+                <ul>
+                  <li>Built FastAPI + SQL backend for semantic search 9/11 interview videos.</li>
+                  <li>Designed NLP + ETL pipeline for 20k+ transcripts.</li>
+                  <li>Automated Dropbox → AWS migration reducing work by 90%.</li>
+                </ul>
+              </div>
+
+              {/* Right placeholder to force LCW to next row */}
+              <div className="timeline-item placeholder"></div>
+
+
+              {/* ====================== ROW 2 — LCW (RIGHT, SHIFTED UP) ====================== */}
+              <div className="timeline-item placeholder"></div>
+
+              <div className="timeline-item right overlap">
+                <div className="dot"></div>
+                <h4><img src="img/lcw.png" className="timeline-logo" />LCW - Springer Capital</h4>
+                <div className="role">Software Engineer</div>
+                <div className="date">Jun 2025 - Aug 2025</div>
+                <ul>
+                  <li>Engineered Python/Django API testing workflows (70% → 95%).</li>
+                  <li>Integrated Airbyte + Jira reducing resolution time by 25%.</li>
+                  <li>Built monitoring dashboards for 450+ daily API requests.</li>
+                </ul>
+              </div>
+
+
+              {/* ====================== ROW 3 — SBU DoIT Intern (LEFT) ====================== */}
+              <div className="timeline-item left">
+                <div className="dot"></div>
+                <h4><img src="img/stonybrookuni.png" className="timeline-logo" />Stony Brook University - Division of Information Technology</h4>
+                <div className="role">Student Software Developer Intern</div>
+                <div className="date">Feb 2025 - May 2025</div>
+                <ul>
+                  <li>Designed RPG-style logic puzzles used by 2,000+ students.</li>
+                  <li>Wokred under professor to improve execution flow & technical insight.</li>
+                  <li>Weekly meeting to improve critical bug and website deployment.</li>
+                </ul>
+              </div>
+
+              {/* Placeholder for empty right column */}
+              <div className="timeline-item placeholder"></div>
+
+
+              {/* ====================== ROW 4 — ITC (RIGHT) ====================== */}
+              <div className="timeline-item placeholder"></div>
+
+              <div className="timeline-item right">
+                <div className="dot"></div>
+                <h4><img src="img/stonybrookmed.png" className="timeline-logo" />ITC Group</h4>
+                <div className="role">Software Engineer Intern</div>
+                <div className="date">Jun 2024 - Jan 2025</div>
+                <ul>
+                  <li>Implemented Angular Material UI/UX reducing manual entry 40%.</li>
+                  <li>Optimized Spring Boot APIs reducing downtime by 30%.</li>
+                  <li>Enhanced .NET backend with validation + CI/CD automation.</li>
+                </ul>
+              </div>
+
             </div>
+
+
           </div>
         </section>
       );
@@ -773,18 +977,39 @@
       return (
         <section className="section" id="projects">
           <h2><span className="underline">Projects Showcase</span></h2>
+
           <div className="projects-grid">
             {projects.map((proj, idx) => (
               <div key={idx} className="project-card">
-                <div className="project-thumb" />
-                <div className="tags">
-                  {proj.tags.map((tag, i) => <span key={i} className="tag">{tag}</span>)}
+
+                <div className="project-thumb">
+                  <img src={proj.image} alt={proj.title + " thumbnail"} />
                 </div>
+
+                <div className="tags">
+                  {proj.tags.map((tag, i) => (
+                    <span key={i} className="tag">{tag}</span>
+                  ))}
+                </div>
+
                 <h4>{proj.title}</h4>
+
                 <ul>
-                  {proj.bullets.map((b, i) => <li key={i}>{b}</li>)}
+                  {proj.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
                 </ul>
-                <div className="project-btn">View Project ↗</div>
+
+                <div className="project-buttons">
+                  <a className="view-btn" href={proj.viewLink} target="_blank">
+                    View Project ↗
+                  </a>
+
+                  <a className="github-btn" href={proj.githubLink} target="_blank">
+                    GitHub Repo ⧉
+                  </a>
+                </div>
+
               </div>
             ))}
           </div>
@@ -792,29 +1017,48 @@
       );
     }
 
+
     function ContactSection() {
       const onSubmit = (e) => {
         e.preventDefault();
-        const data = new FormData(e.target);
-        console.log("Contact message", Object.fromEntries(data.entries()));
-        alert("Message sent! (demo only)");
-        e.target.reset();
+
+        emailjs
+          .sendForm(
+            "service_frltyx6",        // your service ID
+            "template_unohvla",       // your template ID
+            e.target,
+            "XOVK1l5OHpT8SwjRV"       // your public key
+          )
+          .then(
+            () => {
+              alert("Message sent successfully! 🎉");
+              e.target.reset();
+            },
+            (error) => {
+              console.error("EmailJS Error:", error);
+              alert("Oops... something went wrong.");
+            }
+          );
       };
+
       return (
         <section className="section" id="contact">
           <div className="contact-wrap glass">
             <div className="contact-bg" aria-hidden="true"></div>
+
             <div className="contact-panel">
-              <h3>Get in Touch.</h3>
+              <h3>Thanks for your time in here ^^ </h3>
+              <h3>Say hi whenever you’d like. 👋</h3>
               <div className="info">
                 <div>✉️ ethan.d2402@gmail.com</div>
                 <div>📞 934-451-9545</div>
               </div>
               <div className="cta-buttons">
-                <a className="cta-btn" href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
-                <a className="cta-btn" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a className="cta-btn" href="https://github.com/Ethan-Do2005" target="_blank">GitHub</a>
+                <a className="cta-btn" href="https://www.linkedin.com/in/ethando2005/" target="_blank">LinkedIn</a>
               </div>
             </div>
+
             <form className="contact-form" onSubmit={onSubmit}>
               <input name="name" type="text" placeholder="Your Name" required />
               <input name="email" type="email" placeholder="Your Email" required />
@@ -825,6 +1069,7 @@
         </section>
       );
     }
+
 
     function App() {
       return (
@@ -843,5 +1088,10 @@
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(<App />);
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("XOVK1l5OHpT8SwjRV");
+  </script>
+
 </body>
 </html>
